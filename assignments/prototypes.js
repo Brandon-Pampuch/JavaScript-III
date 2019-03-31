@@ -17,28 +17,25 @@
 */
 
 
-// let dimensions = function(size) {
-//     this.length = size.length
-//     this.width = size.width
-//     this.height = size.height
-// }
+
 
 
 let GameObject = function(base) {
-  this.dimensions = {
-    length: base.length,
-    width: base.width,
-    height: base.height
-  }
   this.createdAt = base.createdAt
+  this.dimensions = base.dimensions  //this input doesn't expect any kind of data so you can just place an object on it.
+    
+  
+ 
   this.name = base.name
+  
+
+  GameObject.prototype.destroy = function(){
+    return `${this.name} was removed from the game.`
+    }
   
   }
 
 
-GameObject.prototype.destroy = function(){
-  return `${this.name} was removed from the game.`
-}
 
 let enemy = new GameObject({length: 1, width: 2, height:3, createdAt: "now", name: "brandon"})
 
@@ -56,15 +53,16 @@ console.log(enemy)
 let CharacterStats = function(stats){
   GameObject.call(this,stats)
   this.healthPoints = stats.healthPoints
-  this.takeDamage = function(){
+  
+  CharacterStats.prototype.takeDamage = function(){
     return `${this.name} took damage.`
   }
-  CharacterStats.prototype = Object.create(GameObject.prototype)  // not sure if this has bee added to prototype?????
+  CharacterStats.prototype = Object.create(GameObject.prototype)  
 }
 
 let ninja = new CharacterStats({healthPoints:100})
 
-console.log(ninja)
+console.log(ninja.takeDamage)
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -79,24 +77,20 @@ console.log(ninja)
 let Humanoid = function(chars){
   CharacterStats.call(this, chars)
 
+
   this.team = chars.team,
   this.weapons = chars.weapons,
   this.language = chars.language
-  Humanoid.prototype = Object.create(CharacterStats.prototype) // need to inherit takeDamage still
 
   Humanoid.prototype.greet = function(){
     return `${this.name} offers a greeting in ${this.language}`
    
    }
 
+  Humanoid.prototype = Object.create(CharacterStats.prototype) 
+
+
 }
-
-
-
-
-
-
-
 
 
 let Brandon = new Humanoid({team: "alpha", weapons: "space rifle", language: "french"})
@@ -162,13 +156,13 @@ console.log(Brandon)
   });
 
   console.log(mage); // Today's date  
-  console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }   1. not working
+  console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }   
   console.log(swordsman.healthPoints); // 15
   console.log(mage.name); // Bruce
   console.log(swordsman.team); // The Round Table
   console.log(mage.weapons); // Staff of Shamalama
   console.log(archer.language); // Elvish
-  console.log(archer.greet()); // Lilith offers a greeting in Elvish.             //2. not working 
+  console.log(archer.greet()); // Lilith offers a greeting in Elvish.             
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
