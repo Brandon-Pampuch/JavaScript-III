@@ -83,12 +83,15 @@ let Humanoid = function(chars){
   this.weapons = chars.weapons,
   this.language = chars.language
   Humanoid.prototype = Object.create(CharacterStats.prototype) // need to inherit takeDamage still
+
+  Humanoid.prototype.greet = function(){
+    return `${this.name} offers a greeting in ${this.language}`
+   
+   }
+
 }
 
-Humanoid.prototype.greet = function(){
- return `${this.name} offers a greeting in ${this.language}`
 
-}
 
 
 
@@ -165,7 +168,7 @@ console.log(Brandon)
   console.log(swordsman.team); // The Round Table
   console.log(mage.weapons); // Staff of Shamalama
   console.log(archer.language); // Elvish
-  // console.log(archer.greet()); // Lilith offers a greeting in Elvish.             //2. not working 
+  console.log(archer.greet()); // Lilith offers a greeting in Elvish.             //2. not working 
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
