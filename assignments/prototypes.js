@@ -23,9 +23,6 @@
 let GameObject = function(base) {
   this.createdAt = base.createdAt
   this.dimensions = base.dimensions  //this input doesn't expect any kind of data so you can just place an object on it.
-    
-  
- 
   this.name = base.name
   
 
@@ -34,9 +31,6 @@ let GameObject = function(base) {
     }
   
   }
-
-
-
 let enemy = new GameObject({length: 1, width: 2, height:3, createdAt: "now", name: "brandon"})
 
 console.log(enemy)
@@ -49,9 +43,15 @@ console.log(enemy)
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+let link = {
+  health: 10,
+  // will have all the properties of CharacterStats
+
+}
+
 
 let CharacterStats = function(stats){
-  GameObject.call(this,stats)
+  GameObject.call(this,stats)              //sets the this to the this of the object to be instantiated or created. //try link.
   this.healthPoints = stats.healthPoints
   
   CharacterStats.prototype.takeDamage = function(){

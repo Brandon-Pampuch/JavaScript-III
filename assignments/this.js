@@ -60,3 +60,20 @@ console.log(objB.drive.call(objA))
 
 console.log(objB.drive())
 // code example for Explicit Binding
+
+
+let movies =["up","Jurasic Park"]
+
+const Video = function(movieTitle){
+    this.movieTitle = movieTitle
+}
+
+let videoOne = new Video("Terminator")
+let videoTwo = new Video("Avengers")
+
+let videoPlay = function(){
+    console.log(`${this.movieTitle} and ${movies[0]} and ${movies[1]} `)
+}
+
+videoPlay.apply(videoOne, movies)
+
